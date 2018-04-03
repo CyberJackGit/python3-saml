@@ -308,6 +308,10 @@ class OneLogin_Saml2_Utils(object):
         :return: False if https is not active
         :rtype: boolean
         """
+        # something is wrong in the way request data is populated for https without
+        # specifcally asking for port 443
+        # At-Bay always uses https, so we return True
+        return True
         is_https = 'https' in request_data and request_data['https'] != 'off'
         is_https = is_https or ('server_port' in request_data and str(request_data['server_port']) == '443')
         return is_https
